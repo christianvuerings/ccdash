@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express');
+var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 var extend = require('xtend');
@@ -14,17 +15,18 @@ server.listen(port);
 app.get('/', function (req, res) {
   res.sendfile(__dirname + '/index.html');
 });
+app.use(express.static('public'));
 
 
-
-var response = {};
+var response = {
+  services: {}
+};
 
 io.sockets.on('connection', function (socket) {
 
   sharedEvents.on('scraped', function(result) {
-    response = extend(response, result);
+    response.services = extend(response.services, result);
     socket.emit('ccdash', response);
   });
-
 
 });

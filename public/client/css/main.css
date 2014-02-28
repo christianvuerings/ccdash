@@ -1,0 +1,57 @@
+@font-face {
+    font-family: 'sofia_pro_lightregular';
+    src: url('../font/SofiaProLight-webfont.eot');
+    src: url('../font/SofiaProLight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/SofiaProLight-webfont.woff') format('woff'),
+         url('../font/SofiaProLight-webfont.ttf') format('truetype'),
+         url('../font/SofiaProLight-webfont.svg#sofia_pro_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+body {
+  background: #222;
+  color: #fff;
+  font-family: 'sofia_pro_lightregular', verdana, serif;
+  margin: 0 20px;
+  padding: 0;
+}
+
+.ccdash-state-item {
+  background: #605958;
+  float: left;
+  height: 150px;
+  margin: 40px 20px 0 20px;
+  width: 250px;
+}
+.ccdash-state-item h2 {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+  text-align: center;
+}
+.ccdash-state-item .ccdash-state-item-content {
+  padding: 20px;
+  text-align: center;
+}
+.ccdash-state-failed {
+  background: #f75b49;
+}
+.ccdash-state-successful {
+  background: #689b3a;
+}
