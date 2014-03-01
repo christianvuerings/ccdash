@@ -4,11 +4,9 @@ var sharedEvents = require('./sharedEventEmitter.js');
 var scrapeResponse = {};
 
 var parseElement = function(key, element) {
-  scrapeResponse[key].enabled = element.plan.enabled;
   scrapeResponse[key].key = element.key;
   scrapeResponse[key].number = element.number;
-  scrapeResponse[key].state = element.state.toLowerCase();
-  scrapeResponse[key].lifeCycleState = element.lifeCycleState;
+  scrapeResponse[key].state = element.state.toLowerCase(); //successful / failed
   scrapeResponse[key].planUrl = 'https://bamboo.ets.berkeley.edu/bamboo/browse/' + element.plan.key;
   scrapeResponse[key].currentBuildUrl = 'https://bamboo.ets.berkeley.edu/bamboo/browse/' + element.key;
 };

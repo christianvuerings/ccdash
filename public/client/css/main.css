@@ -36,7 +36,7 @@ body {
 .ccdash-state-item {
   background: #605958;
   float: left;
-  height: 150px;
+  height: 180px;
   margin: 40px 20px 0 20px;
   width: 250px;
 }
@@ -55,3 +55,26 @@ body {
 .ccdash-state-successful {
   background: #689b3a;
 }
+
+/* Spinner */
+/* Animation */
+@keyframes ccdash-loading {
+  to { transform: rotate(360deg); }
+}
+
+/* Loader (*/
+.ccdash-spinner {
+  background: transparent;
+  border-top: 4px solid rgba(255, 255, 255, 0.8);
+  border-right: 4px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 4px solid rgba(119, 119, 119, 0.3);
+  border-left: 4px solid rgba(119, 119, 119, 0.3);
+  border-radius: 50%;
+  height: 40px;
+  margin: 15px auto;
+  width: 40px;
+
+  animation: ccdash-loading 1.2s infinite linear;
+}
+
+

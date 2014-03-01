@@ -6,8 +6,17 @@ var extend = require('xtend');
 
 var sharedEvents = require('./server/sharedEventEmitter.js');
 
-var bamboo = require('./server/bamboo.js');
-bamboo.init();
+/**
+ * Load all the different services
+ */
+var services = ['bamboo', 'github'];
+var loadServices = function() {
+  services.forEach(function(service) {
+    var serviceModule = require('./server/' + service + '.js');
+    serviceModule.init();
+  });
+};
+loadServices();
 
 var port = process.env.PORT || 3000;
 server.listen(port);
