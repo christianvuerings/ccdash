@@ -3,6 +3,9 @@ var sharedEvents = require('./sharedEventEmitter.js');
 
 var scrapeResponse = {};
 
+var username = process.env.BAMBOO_USERNAME;
+var password = process.env.BAMBOO_PASSWORD;
+
 var parseElement = function(key, element) {
   scrapeResponse[key].key = element.key;
   scrapeResponse[key].number = element.number;
@@ -24,7 +27,7 @@ var scrapePlan = function(key, url) {
     if (!error && response.statusCode === 200) {
       parsePlan(key, body);
     }
-  });
+  }).auth(username, password, true);
 };
 
 var parsePlans = function(body) {
@@ -59,7 +62,7 @@ var scrapePlans = function() {
     if (!error && response.statusCode === 200) {
       parsePlans(body);
     }
-  });
+  }).auth(username, password, true);
 };
 
 var init = function() {
