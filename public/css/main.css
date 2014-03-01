@@ -33,20 +33,42 @@ body {
   padding: 0;
 }
 
-.ccdash-state-item {
+.cc-clearfix-container:before,
+.cc-clearfix-container:after {
+    content: " ";
+    display: table;
+}
+.cc-clearfix-container:after {
+    clear: both;
+}
+
+.ccdash-block {
   background: #605958;
   float: left;
-  height: 180px;
   margin: 40px 20px 0 20px;
+}
+.ccdash-block-list {
+  clear: both;
+  list-style-type: none;
+  padding: 20px;
+}
+.ccdash-block-content {
+  padding: 20px;
+}
+
+.ccdash-block h2 {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 10px 20px;
+}
+
+.ccdash-state-item {
+  height: 180px;
   width: 250px;
 }
 .ccdash-state-item h2 {
-  background: rgba(0, 0, 0, 0.15);
-  padding: 10px 20px;
   text-align: center;
 }
 .ccdash-state-item .ccdash-state-item-content {
-  padding: 20px;
   text-align: center;
 }
 .ccdash-state-failed {
@@ -54,6 +76,16 @@ body {
 }
 .ccdash-state-successful {
   background: #689b3a;
+}
+
+.ccdash-pulls-title {
+  float: left;
+  margin-right: 25px;
+  opacity: 0.8;
+}
+.ccdash-pulls-user {
+  float: right;
+  opacity: 0.4;
 }
 
 /* Spinner */

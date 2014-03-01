@@ -7,35 +7,56 @@ var extend = require('xtend');
 var sharedEvents = require('./server/sharedEventEmitter.js');
 
 /**
- * Load all the different services
+ * Set public folder
  */
-var services = ['bamboo', 'github'];
-var loadServices = function() {
-  services.forEach(function(service) {
+app.use(express.static('public'));
+
+/**
+ * Start the server
+ */
+var port = process.env.PORT || 3000;
+server.listen(port);
+
+/**
+ * Load the different builds
+ */
+var builds = ['bamboo', 'travis', 'github'];
+var loadBuilds = function() {
+  builds.forEach(function(service) {
     var serviceModule = require('./server/' + service + '.js');
     serviceModule.init();
   });
 };
-loadServices();
-
-var port = process.env.PORT || 3000;
-server.listen(port);
-
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
-app.use(express.static('public'));
+loadBuilds();
 
 
+/**
+ * Set up the socket connection
+ */
 var response = {
-  services: {}
+  builds: {},
+  github: {}
 };
 
 io.sockets.on('connection', function (socket) {
 
-  sharedEvents.on('scraped', function(result) {
-    response.services = extend(response.services, result);
+  var listenScrape = function(item) {
+    sharedEvents.on('scraped.' + item, function(result) {
+      response[item] = extend(response[item], result);
+    });
+  };
+  for (var i in response) {
+    if (response.hasOwnProperty(i)) {
+      listenScrape(i);
+    }
+  }
+
+  var emitSocket = function() {
     socket.emit('ccdash', response);
-  });
+  };
+
+  // Emit socket at 0 & every 3 seconds
+  emitSocket();
+  setInterval(emitSocket, 3000);
 
 });

@@ -1,0 +1,43 @@
+<!doctype html>
+<html ng-app="ccdash">
+<head>
+  <meta name="charset" content="utf-8">
+  <title>CalCentral Dashboard</title>
+
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />
+
+  <script src="/javascript/prefixfree.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/javascript/client.js"></script>
+</head>
+<body ng-controller="MainController">
+
+  <div data-ng-repeat="(service, serviceItem) in data.builds">
+    <div class="ccdash-block ccdash-state-item ccdash-state-{{value.state}}" data-ng-repeat="(key, value) in serviceItem">
+      <h2>
+        <a ng-href="{{value.planUrl}}" ng-bind-template="{{service}}: {{key}}"></a>
+      </h2>
+      <div class="ccdash-block-content ccdash-state-item-content">
+        <a ng-href="{{value.currentBuildUrl}}" ng-bind-template="#{{value.number}}"></a>
+        <div class="ccdash-spinner" data-ng-show="value.isBuilding"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ccdash-pulls ccdash-block" data-ng-show="data.github.pulls">
+    <h2>
+      github: pull requests
+    </h2>
+    <ul class="ccdash-block-list cc-clearfix-container">
+      <li data-ng-repeat="pull in data.github.pulls">
+        <a class="ccdash-pulls-title" ng-href="{{pull.url}}" ng-bind="pull.title"></a>
+        <div class="ccdash-pulls-user">
+          <a ng-href="{{pull.user.url}}" ng-bind-template="@{{pull.user.name}}"></a>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

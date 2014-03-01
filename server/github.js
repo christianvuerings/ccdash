@@ -1,57 +1,55 @@
 var request = require('request');
 var sharedEvents = require('./sharedEventEmitter.js');
 
-var scrapeResponse = {};
+var scrapePullsResponse = [];
 
-
-var getState = function(element) {
-  if (element.last_build_result === 0) {
-    return 'successful';
-  } else if (element.last_build_result === 1) {
-    return 'failed';
-  }
-};
-var getIsBuilding = function(element) {
-  return (element.last_build_status === null);
-};
-
-var parsePlan = function(body) {
-  body = JSON.parse(body);
-
-  var key = 'master';
-
-  if (!scrapeResponse[key]) {
-    scrapeResponse[key] = {};
-  }
-
-  scrapeResponse[key].key = key;
-  scrapeResponse[key].number = body.last_build_id;
-  scrapeResponse[key].state = getState(body); //successful / failed
-  scrapeResponse[key].planUrl = 'https://travis-ci.org/ets-berkeley-edu/calcentral';
-  scrapeResponse[key].currentBuildUrl = 'https://travis-ci.org/ets-berkeley-edu/calcentral/builds/' + body.last_build_id;
-  scrapeResponse[key].isBuilding = getIsBuilding(body);
-};
+var username = process.env.GITHUB_USERNAME;
+var password = process.env.GITHUB_PASSWORD;
 
 var sendEvent = function() {
-  sharedEvents.emit('scraped', {
-    github: scrapeResponse
+  sharedEvents.emit('scraped.github', {
+    pulls: scrapePullsResponse
   });
 };
 
-var scrapePlans = function() {
+var parsePulls = function(body) {
+  body = JSON.parse(body);
+
+  scrapePullsResponse = [];
+
+  body.forEach(function(element) {
+    var pullResponse = {
+      url: element.html_url,
+      state: element.state,
+      title: element.title,
+      user: {
+        avatar: element.user.avatar_url,
+        name: element.user.login,
+        url: element.user.html_url
+      }
+    };
+    scrapePullsResponse.push(pullResponse);
+  });
+
+  sendEvent();
+};
+
+var scrapePulls = function() {
   request({
-    url: 'https://api.travis-ci.org/repositories/ets-berkeley-edu/calcentral.json',
-    rejectUnauthorized: false
+    url: 'https://api.github.com/repos/ets-berkeley-edu/calcentral/pulls',
+    rejectUnauthorized: false,
+    headers: {
+      'User-Agent': 'request'
+    }
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      parsePlan(body);
+      parsePulls(body);
     }
-  });
+  }).auth(username, password, true);
 };
 
 var init = function() {
-  setInterval(sendEvent, 2000);
-  setInterval(scrapePlans, 4000);
+  setInterval(scrapePulls, 4000);
 };
 
 module.exports = {

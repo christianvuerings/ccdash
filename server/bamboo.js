@@ -49,7 +49,7 @@ var parsePlans = function(body) {
 };
 
 var sendEvent = function() {
-  sharedEvents.emit('scraped', {
+  sharedEvents.emit('scraped.builds', {
     bamboo: scrapeResponse
   });
 };
