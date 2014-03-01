@@ -12,7 +12,7 @@
     console.log('host:', host);
     var socket = io.connect(host);
     socket.on('ccdash', function(data) {
-      console.log(data);
+      console.log('data:', data);
       $scope.data = data;
       $scope.$apply();
     });
