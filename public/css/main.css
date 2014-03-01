@@ -78,6 +78,9 @@ body {
   background: #689b3a;
 }
 
+.ccdash-pulls {
+  clear: both;
+}
 .ccdash-pulls-title {
   float: left;
   margin-right: 25px;
