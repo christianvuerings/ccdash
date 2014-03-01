@@ -12,6 +12,9 @@
     "socket.io": "0.9.16",
     "xtend": "2.1.2"
   },
+  "engines": {
+    "node": "0.10.x"
+  },
   "keywords": [
     "Berkeley",
     "CalCentral"
