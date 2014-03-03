@@ -18,7 +18,7 @@ var getIsBuilding = function(element) {
 var parsePlan = function(body) {
   body = JSON.parse(body);
 
-  var key = 'master';
+  var key = 'latest';
 
   if (!scrapeResponse[key]) {
     scrapeResponse[key] = {};
