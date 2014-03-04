@@ -33,7 +33,7 @@ var scrapeGpa = function() {
     'https://codeclimate.com/github/ets-berkeley-edu/calcentral',
     ['http://code.jquery.com/jquery.js'],
     function (errors, window) {
-      if (window) {
+      if (window && window.$) {
         scrapeClimateResponse.gpa = window.$('.donut_chart .gpa .number').text();
       }
     }
