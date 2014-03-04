@@ -69,7 +69,7 @@
           data: {},
           innerSize: '70%',
           dataLabels: {
-            distance: -25,
+            distance: -13,
             color: '#fff',
             style: {
               fontSize: '16px',
