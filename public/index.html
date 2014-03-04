@@ -7,6 +7,8 @@
   <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
   <script src="/javascript/prefixfree.js"></script>
+  <script src="/javascript/highcharts.js"></script>
+
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/javascript/client.js"></script>
@@ -25,11 +27,11 @@
     </div>
   </div>
 
-  <div class="ccdash-pulls ccdash-block" data-ng-show="data.github.pulls">
+  <div class="ccdash-block ccdash-clear" data-ng-show="data.github.pulls">
     <h2>
-      github: pull requests
+      <a ng-href="{{data.github.pullUrl}}">github: pull requests</a>
     </h2>
-    <ul class="ccdash-block-list cc-clearfix-container">
+    <ul class="ccdash-block-list ccdash-clearfix-container">
       <li data-ng-repeat="pull in data.github.pulls">
         <a class="ccdash-pulls-title" ng-href="{{pull.url}}" ng-bind="pull.title"></a>
         <div class="ccdash-pulls-user">
@@ -37,6 +39,15 @@
         </div>
       </li>
     </ul>
+  </div>
+
+  <div class="ccdash-block ccdash-clear" data-ng-show="data.codeclimate.donut" ng-controller="CodeClimateController">
+    <h2>
+      <a ng-href="{{data.codeclimate.url}}">code climate: ruby</a>
+    </h2>
+    <div class="ccdash-block-content ccdash-codeclimate-donut-container">
+      <div id="ccdash-codeclimate-donut" class="ccdash-codeclimate-donut"></div>
+    </div>
   </div>
 
 </body>

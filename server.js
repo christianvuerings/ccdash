@@ -20,7 +20,7 @@ server.listen(port);
 /**
  * Load the different builds
  */
-var builds = ['bamboo', 'travis', 'github'];
+var builds = ['bamboo', 'travis', 'github', 'codeclimate'];
 var loadBuilds = function() {
   builds.forEach(function(service) {
     var serviceModule = require('./server/' + service + '.js');
@@ -35,7 +35,8 @@ loadBuilds();
  */
 var response = {
   builds: {},
-  github: {}
+  github: {},
+  codeclimate: {}
 };
 
 io.sockets.on('connection', function (socket) {

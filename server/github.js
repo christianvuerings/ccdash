@@ -8,6 +8,7 @@ var password = process.env.GITHUB_PASSWORD;
 
 var sendEvent = function() {
   sharedEvents.emit('scraped.github', {
+    pullUrl: 'https://github.com/ets-berkeley-edu/calcentral/pulls',
     pulls: scrapePullsResponse
   });
 };

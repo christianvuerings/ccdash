@@ -32,13 +32,15 @@ body {
   margin: 0 20px;
   padding: 0;
 }
-
-.cc-clearfix-container:before,
-.cc-clearfix-container:after {
+.ccdash-clear {
+  clear: both;
+}
+.ccdash-clearfix-container:before,
+.ccdash-clearfix-container:after {
     content: " ";
     display: table;
 }
-.cc-clearfix-container:after {
+.ccdash-clearfix-container:after {
     clear: both;
 }
 
@@ -78,9 +80,6 @@ body {
   background: #689b3a;
 }
 
-.ccdash-pulls {
-  clear: both;
-}
 .ccdash-pulls-title {
   float: left;
   margin-right: 25px;
@@ -89,6 +88,11 @@ body {
 .ccdash-pulls-user {
   float: right;
   opacity: 0.4;
+}
+
+.ccdash-codeclimate-donut {
+  height: 400px;
+  width: 400px;
 }
 
 /* Spinner */
