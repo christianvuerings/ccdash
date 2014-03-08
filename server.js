@@ -23,8 +23,7 @@ server.listen(port);
 var builds = ['bamboo', 'travis', 'github', 'codeclimate'];
 var loadBuilds = function() {
   builds.forEach(function(service) {
-    var serviceModule = require('./server/' + service + '.js');
-    serviceModule.init();
+    require('./server/' + service + '.js').init();
   });
 };
 loadBuilds();
@@ -39,18 +38,18 @@ var response = {
   codeclimate: {}
 };
 
-io.sockets.on('connection', function (socket) {
-
-  var listenScrape = function(item) {
-    sharedEvents.on('scraped.' + item, function(result) {
-      response[item] = extend(response[item], result);
-    });
-  };
-  for (var i in response) {
-    if (response.hasOwnProperty(i)) {
-      listenScrape(i);
-    }
+var listenScrape = function(item) {
+  sharedEvents.on('scraped.' + item, function(result) {
+    response[item] = extend(response[item], result);
+  });
+};
+for (var i in response) {
+  if (response.hasOwnProperty(i)) {
+    listenScrape(i);
   }
+}
+
+io.sockets.on('connection', function connectionEstablished(socket) {
 
   var emitSocket = function() {
     socket.emit('ccdash', response);
