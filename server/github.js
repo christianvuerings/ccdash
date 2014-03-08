@@ -1,12 +1,10 @@
 var request = require('request');
 var sharedEvents = require('./sharedEventEmitter.js');
 
-var scrapePullsResponse = [];
-
 var username = process.env.GITHUB_USERNAME;
 var password = process.env.GITHUB_PASSWORD;
 
-var sendEvent = function() {
+var sendEvent = function(scrapePullsResponse) {
   sharedEvents.emit('scraped.github', {
     pullUrl: 'https://github.com/ets-berkeley-edu/calcentral/pulls',
     pulls: scrapePullsResponse
@@ -16,7 +14,7 @@ var sendEvent = function() {
 var parsePulls = function(body) {
   body = JSON.parse(body);
 
-  scrapePullsResponse = [];
+  var scrapePullsResponse = [];
 
   body.forEach(function(element) {
     var pullResponse = {
@@ -32,7 +30,7 @@ var parsePulls = function(body) {
     scrapePullsResponse.push(pullResponse);
   });
 
-  sendEvent();
+  sendEvent(scrapePullsResponse);
 };
 
 var scrapePulls = function() {

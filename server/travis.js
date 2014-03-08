@@ -1,8 +1,11 @@
 var request = require('request');
 var sharedEvents = require('./sharedEventEmitter.js');
 
-var scrapeResponse = {};
-
+var sendEvent = function(scrapeResponse) {
+  sharedEvents.emit('scraped.builds', {
+    travis: scrapeResponse
+  });
+};
 
 var getState = function(element) {
   if (element.last_build_result === 0) {
@@ -11,6 +14,7 @@ var getState = function(element) {
     return 'failed';
   }
 };
+
 var getIsBuilding = function(element) {
   return (element.last_build_status === null);
 };
@@ -19,6 +23,8 @@ var parsePlan = function(body) {
   body = JSON.parse(body);
 
   var key = 'latest';
+
+  var scrapeResponse = {};
 
   if (!scrapeResponse[key]) {
     scrapeResponse[key] = {};
@@ -30,12 +36,8 @@ var parsePlan = function(body) {
   scrapeResponse[key].planUrl = 'https://travis-ci.org/ets-berkeley-edu/calcentral';
   scrapeResponse[key].currentBuildUrl = 'https://travis-ci.org/ets-berkeley-edu/calcentral/builds/' + body.last_build_id;
   scrapeResponse[key].isBuilding = getIsBuilding(body);
-};
 
-var sendEvent = function() {
-  sharedEvents.emit('scraped.builds', {
-    travis: scrapeResponse
-  });
+  sendEvent(scrapeResponse);
 };
 
 var scrapePlans = function() {
@@ -50,7 +52,6 @@ var scrapePlans = function() {
 };
 
 var init = function() {
-  setInterval(sendEvent, 2000);
   setInterval(scrapePlans, 4000);
 };
 
