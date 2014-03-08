@@ -54,6 +54,9 @@ body {
   list-style-type: none;
   padding: 20px;
 }
+.ccdash-block-list li {
+  clear: both;
+}
 .ccdash-block-content {
   padding: 20px;
 }
