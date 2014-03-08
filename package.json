@@ -10,7 +10,7 @@
     "express": "3.4.8",
     "jsdom": "0.10.1",
     "request": "2.34.0",
-    "socket.io": "0.9.16",
+    "sockjs": "0.3.8",
     "xtend": "2.1.2"
   },
   "engines": {

@@ -33,6 +33,7 @@ var parsePulls = function(body) {
   sendEvent(scrapePullsResponse);
 };
 
+var timeout;
 var scrapePulls = function() {
   request({
     url: 'https://api.github.com/repos/ets-berkeley-edu/calcentral/pulls',
@@ -45,10 +46,11 @@ var scrapePulls = function() {
       parsePulls(body);
     }
   }).auth(username, password, true);
+  timeout = setTimeout(scrapePulls, 4000);
 };
 
 var init = function() {
-  setInterval(scrapePulls, 4000);
+  scrapePulls();
 };
 
 module.exports = {

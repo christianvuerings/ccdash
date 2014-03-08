@@ -29,6 +29,7 @@ var parseDonut = function(body) {
   scrapeGpa(scrapeClimateResponse);
 };
 
+var timeout;
 var scrapeDonut = function() {
   request({
     url: 'https://codeclimate.com/repos/50787003f3ea001d6a001725/donut.json',
@@ -38,10 +39,11 @@ var scrapeDonut = function() {
       parseDonut(body);
     }
   });
+  timeout = setTimeout(scrapeDonut, 4000);
 };
 
 var init = function() {
-  setInterval(scrapeDonut, 4000);
+  scrapeDonut();
 };
 
 module.exports = {

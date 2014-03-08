@@ -1,12 +1,16 @@
 var request = require('request');
 var sharedEvents = require('./sharedEventEmitter.js');
 
-var scrapeResponse = {};
-
 var username = process.env.BAMBOO_USERNAME;
 var password = process.env.BAMBOO_PASSWORD;
 
-var parseElement = function(key, element) {
+var sendEvent = function(scrapeResponse) {
+  sharedEvents.emit('scraped.builds', {
+    bamboo: scrapeResponse
+  });
+};
+
+var parseElement = function(scrapeResponse, key, element) {
   scrapeResponse[key].key = element.key;
   scrapeResponse[key].number = element.number;
   scrapeResponse[key].state = element.state.toLowerCase(); //successful / failed
@@ -14,24 +18,26 @@ var parseElement = function(key, element) {
   scrapeResponse[key].currentBuildUrl = 'https://bamboo.ets.berkeley.edu/bamboo/browse/' + element.key;
 };
 
-var parsePlan = function(key, body) {
+var parsePlan = function(scrapeResponse, key, body) {
   body = JSON.parse(body);
   scrapeResponse[key].isBuilding = body.isBuilding;
 };
 
-var scrapePlan = function(key, url) {
+var scrapePlan = function(scrapeResponse, key, url) {
   request({
     url: url,
     rejectUnauthorized: false
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      parsePlan(key, body);
+      parsePlan(scrapeResponse, key, body);
+      sendEvent(scrapeResponse);
     }
   }).auth(username, password, true);
 };
 
 var parsePlans = function(body) {
   body = JSON.parse(body);
+  var scrapeResponse = {};
   if (body && body.results && body.results.result) {
     var result = body.results.result;
     result.forEach(function(element) {
@@ -41,19 +47,14 @@ var parsePlans = function(body) {
         if (!scrapeResponse[realkey]) {
           scrapeResponse[realkey] = {};
         }
-        scrapePlan(realkey, element.plan.link.href + '.json');
-        parseElement(realkey, element);
+        scrapePlan(scrapeResponse, realkey, element.plan.link.href + '.json');
+        parseElement(scrapeResponse, realkey, element);
       }
     });
   }
 };
 
-var sendEvent = function() {
-  sharedEvents.emit('scraped.builds', {
-    bamboo: scrapeResponse
-  });
-};
-
+var timeout;
 var scrapePlans = function() {
   request({
     url: 'https://bamboo.ets.berkeley.edu/bamboo/rest/api/latest/result.json',
@@ -63,11 +64,11 @@ var scrapePlans = function() {
       parsePlans(body);
     }
   }).auth(username, password, true);
+  timeout = setTimeout(scrapePlans, 4000);
 };
 
 var init = function() {
-  setInterval(sendEvent, 2000);
-  setInterval(scrapePlans, 4000);
+  scrapePlans();
 };
 
 module.exports = {
