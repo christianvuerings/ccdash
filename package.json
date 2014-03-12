@@ -7,8 +7,8 @@
   "bugs": "https://github.com/christianv/ccdash/issues",
   "description": "CalCentral Dashboard",
   "dependencies": {
+    "cheerio": "0.13.1",
     "express": "3.4.8",
-    "jsdom": "0.10.1",
     "request": "2.34.0",
     "sockjs": "0.3.8",
     "xtend": "2.1.2"

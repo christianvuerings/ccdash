@@ -5,9 +5,11 @@ var username = process.env.GITHUB_USERNAME;
 var password = process.env.GITHUB_PASSWORD;
 
 var sendEvent = function(scrapePullsResponse) {
-  sharedEvents.emit('scraped.github', {
-    pullUrl: 'https://github.com/ets-berkeley-edu/calcentral/pulls',
-    pulls: scrapePullsResponse
+  process.nextTick(function() {
+    sharedEvents.emit('scraped.github', {
+      pullUrl: 'https://github.com/ets-berkeley-edu/calcentral/pulls',
+      pulls: scrapePullsResponse
+    });
   });
 };
 
@@ -43,7 +45,9 @@ var scrapePulls = function() {
     }
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      parsePulls(body);
+      process.nextTick(function() {
+        parsePulls(body);
+      });
     }
   }).auth(username, password, true);
   timeout = setTimeout(scrapePulls, 4000);

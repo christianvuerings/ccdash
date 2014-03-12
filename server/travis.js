@@ -46,7 +46,9 @@ var scrapePlans = function() {
     rejectUnauthorized: false
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      parsePlan(body);
+      process.nextTick(function() {
+        parsePlan(body);
+      });
     }
   });
 };

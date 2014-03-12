@@ -5,8 +5,10 @@ var username = process.env.BAMBOO_USERNAME;
 var password = process.env.BAMBOO_PASSWORD;
 
 var sendEvent = function(scrapeResponse) {
-  sharedEvents.emit('scraped.builds', {
-    bamboo: scrapeResponse
+  process.nextTick(function() {
+    sharedEvents.emit('scraped.builds', {
+      bamboo: scrapeResponse
+    });
   });
 };
 
@@ -61,7 +63,9 @@ var scrapePlans = function() {
     rejectUnauthorized: false
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
-      parsePlans(body);
+      process.nextTick(function() {
+        parsePlans(body);
+      });
     }
   }).auth(username, password, true);
   timeout = setTimeout(scrapePlans, 4000);
