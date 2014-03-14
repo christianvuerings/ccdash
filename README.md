@@ -20,7 +20,7 @@ cp .env_template .env
 
 Edit the `.env` file.
 
-## Start server
+### Start server
 
 ```
 foreman run nodemon server.js
