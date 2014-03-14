@@ -10,6 +10,24 @@ http://ccdash.herokuapp.com/
 * [Foreman](https://github.com/ddollar/foreman)
 * [Nodemon](https://github.com/remy/nodemon#installation)
 
+The app won't work without regular Ruby (not JRuby). Make Ruby 1.9.3 your Ruby:
+```
+rvm use ruby-1.9.3
+```
+
+Install Node.js(http://nodejs.org/download/):
+```
+brew install node
+```
+
+Install required node packages:
+```
+npm install
+npm install -g nodemon
+```
+
+## Configuration
+
 ### Environment variables
 
 Copy the template to the global `.env` file.
