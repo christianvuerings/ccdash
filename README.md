@@ -2,7 +2,13 @@
 
 http://ccdash.herokuapp.com/
 
-## Configuration
+## Installation - Locally
+
+### Prerequisites
+
+* [NodeJS (0.10.x)](http://nodejs.org/)
+* [Foreman](https://github.com/ddollar/foreman)
+* [Nodemon](https://github.com/remy/nodemon#installation)
 
 ### Environment variables
 
@@ -20,7 +26,7 @@ Edit the `.env` file.
 foreman run nodemon server.js
 ```
 
-## Heroku
+## Installation - Heroku
 
 ### Set variable
 
@@ -33,7 +39,6 @@ heroku config:set GITHUB_USERNAME=x
 ```
 git push heroku
 ```
-
 
 ## Inspiration:
 
