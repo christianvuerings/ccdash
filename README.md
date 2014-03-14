@@ -15,7 +15,7 @@ The app won't work without regular Ruby (not JRuby). Make Ruby 1.9.3 your Ruby:
 rvm use ruby-1.9.3
 ```
 
-Install Node.js(http://nodejs.org/download/):
+Install [Node.js](http://nodejs.org/download/):
 ```
 brew install node
 ```
