@@ -37,6 +37,36 @@
     </div>
   </div>
 
+  <div class="ccdash-block ccdash-state-item {{data.stats.hot_plate.state}}">
+    <h2>
+      hot plate
+    </h2>
+
+    <div class="ccdash-block-content ccdash-state-item-content">
+      <div>
+        <span ng-hide="data.stats.hot_plate.last_batch_size">--</span>
+        <a ng-href="TODO" ng-bind="data.stats.hot_plate.last_batch_size"></a> users
+      </div>
+      <div ng-show="data.stats.hot_plate.outstanding_warmups">
+        <a ng-href="TODO" ng-bind="data.stats.hot_plate.outstanding_warmups"></a> pending
+      </div>
+      <div>
+        <span ng-hide="data.stats.hot_plate.average_time">--</span>
+        <a ng-href="TODO" ng-bind="data.stats.hot_plate.average_time"></a> sec/user
+      </div>
+    </div>
+  </div>
+
+  <div class="ccdash-block ccdash-state-item {{data.stats.live_updates_warmer.state}}">
+    <h2>
+      live updates
+    </h2>
+    <div class="ccdash-block-content ccdash-state-item-content">
+      <span ng-hide="data.stats.live_updates_warmer.average_time">--</span>
+      <a ng-href="TODO" ng-bind="data.stats.live_updates_warmer.average_time"></a> sec/user
+    </div>
+  </div>
+
   <div class="ccdash-block ccdash-clear" data-ng-show="data.github.pulls">
     <h2>
       <a ng-href="{{data.github.pullUrl}}">github: pull requests</a>
