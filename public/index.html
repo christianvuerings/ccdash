@@ -45,14 +45,14 @@
     <div class="ccdash-block-content ccdash-state-item-content">
       <div>
         <span ng-hide="data.stats.hot_plate.last_batch_size">--</span>
-        <a ng-href="TODO" ng-bind="data.stats.hot_plate.last_batch_size"></a> users
+        <span ng-bind="data.stats.hot_plate.last_batch_size"></span> users
       </div>
       <div ng-show="data.stats.hot_plate.outstanding_warmups">
-        <a ng-href="TODO" ng-bind="data.stats.hot_plate.outstanding_warmups"></a> pending
+        <span ng-bind="data.stats.hot_plate.outstanding_warmups"></span> pending
       </div>
       <div>
         <span ng-hide="data.stats.hot_plate.average_time">--</span>
-        <a ng-href="TODO" ng-bind="data.stats.hot_plate.average_time"></a> sec/user
+        <span ng-bind="data.stats.hot_plate.average_time"></span> sec/user
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
     </h2>
     <div class="ccdash-block-content ccdash-state-item-content">
       <span ng-hide="data.stats.live_updates_warmer.average_time">--</span>
-      <a ng-href="TODO" ng-bind="data.stats.live_updates_warmer.average_time"></a> sec/user
+      <span ng-bind="data.stats.live_updates_warmer.average_time"></span> sec/user
     </div>
   </div>
 
