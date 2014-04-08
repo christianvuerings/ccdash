@@ -29,7 +29,7 @@ console.log('[%s] Server running', process.pid);
 /**
  * Load the different builds
  */
-var builds = ['bamboo', 'travis', 'github', 'codeclimate'];
+var builds = ['bamboo', 'travis', 'github', 'codeclimate', 'stats'];
 var loadBuilds = function() {
   builds.forEach(function(service) {
     require('./server/' + service + '.js').init();
@@ -44,7 +44,8 @@ loadBuilds();
 var response = {
   builds: {},
   github: {},
-  codeclimate: {}
+  codeclimate: {},
+  stats: {}
 };
 var previousResponse = {};
 

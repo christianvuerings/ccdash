@@ -76,6 +76,9 @@ body {
 .ccdash-state-item .ccdash-state-item-content {
   text-align: center;
 }
+.ccdash-state-warning {
+  background: #ff7e00
+}
 .ccdash-state-failed {
   background: #f75b49;
 }
