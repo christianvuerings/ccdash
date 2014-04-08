@@ -86,6 +86,9 @@ body {
   background: #689b3a;
 }
 
+.ccdash-pulls {
+  max-width: 830px;
+}
 .ccdash-pulls-title {
   float: left;
   margin-right: 25px;

@@ -28,15 +28,6 @@
     </div>
   </div>
 
-  <div class="ccdash-block" data-ng-show="data.codeclimate.donut" ng-controller="CodeClimateController">
-    <h2>
-      <a ng-href="{{data.codeclimate.url}}">code climate: ruby</a>
-    </h2>
-    <div class="ccdash-block-content ccdash-codeclimate-donut-container">
-      <div id="ccdash-codeclimate-donut" class="ccdash-codeclimate-donut"></div>
-    </div>
-  </div>
-
   <div class="ccdash-block ccdash-state-item {{data.stats.hot_plate.state}}">
     <h2>
       hot plate
@@ -67,7 +58,7 @@
     </div>
   </div>
 
-  <div class="ccdash-block ccdash-clear" data-ng-show="data.github.pulls">
+  <div class="ccdash-block ccdash-pulls" data-ng-show="data.github.pulls">
     <h2>
       <a ng-href="{{data.github.pullUrl}}">github: pull requests</a>
     </h2>
@@ -79,6 +70,15 @@
         </div>
       </li>
     </ul>
+  </div>
+
+  <div class="ccdash-block ccdash-clear" data-ng-show="data.codeclimate.donut" ng-controller="CodeClimateController">
+    <h2>
+      <a ng-href="{{data.codeclimate.url}}">code climate: ruby</a>
+    </h2>
+    <div class="ccdash-block-content ccdash-codeclimate-donut-container">
+      <div id="ccdash-codeclimate-donut" class="ccdash-codeclimate-donut"></div>
+    </div>
   </div>
 
   <script>
