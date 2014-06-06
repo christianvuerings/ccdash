@@ -99,12 +99,9 @@ body {
   opacity: 0.4;
 }
 
-.ccdash-codeclimate-donut {
-  height: 250px;
-  width: 250px;
-}
-.ccdash-codeclimate-donut-container {
-  padding: 0;
+.ccdash-codeclimate-gpa {
+  font-size: 24px;
+  font-weight: bold;
 }
 
 /* Spinner */

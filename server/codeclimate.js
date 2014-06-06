@@ -8,48 +8,29 @@ var sendEvent = function(scrapeClimateResponse) {
   });
 };
 
-var scrapeGpa = function(scrapeClimateResponse) {
+var timeout;
+var scrapeGpa = function() {
+  var url = 'https://codeclimate.com/github/ets-berkeley-edu/calcentral';
   request({
-    url: 'https://codeclimate.com/github/ets-berkeley-edu/calcentral',
+    url: url,
     rejectUnauthorized: false
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
       process.nextTick(function() {
         var $ = cheerio.load(body);
-        scrapeClimateResponse.gpa = $('.donut_chart .gpa .number').text();
+        var scrapeClimateResponse = {
+          gpa: $('.donut_chart .gpa .number').text(),
+          url: url
+        };
         sendEvent(scrapeClimateResponse);
       });
     }
   });
-};
-
-var parseDonut = function(body) {
-  body = JSON.parse(body);
-
-  var scrapeClimateResponse = {};
-  scrapeClimateResponse.url = 'https://codeclimate.com/github/ets-berkeley-edu/calcentral';
-  scrapeClimateResponse.donut = body;
-
-  scrapeGpa(scrapeClimateResponse);
-};
-
-var timeout;
-var scrapeDonut = function() {
-  request({
-    url: 'https://codeclimate.com/repos/50787003f3ea001d6a001725/donut.json',
-    rejectUnauthorized: false
-  }, function (error, response, body) {
-    if (!error && response.statusCode === 200) {
-      process.nextTick(function() {
-        parseDonut(body);
-      });
-    }
-  });
-  timeout = setTimeout(scrapeDonut, 4000);
+  timeout = setTimeout(scrapeGpa, 4000);
 };
 
 var init = function() {
-  scrapeDonut();
+  scrapeGpa();
 };
 
 module.exports = {

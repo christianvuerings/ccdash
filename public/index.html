@@ -8,7 +8,6 @@
   <link rel="stylesheet" type="text/css" href="/css/main.css" />
 
   <script src="/javascript/prefixfree.js"></script>
-  <script src="/javascript/highcharts.js"></script>
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js"></script>
   <script src="/javascript/sock.js"></script>
@@ -72,12 +71,13 @@
     </ul>
   </div>
 
-  <div class="ccdash-block ccdash-clear" data-ng-show="data.codeclimate.donut" ng-controller="CodeClimateController">
+  <div class="ccdash-block ccdash-state-item ccdash-clear" data-ng-show="data.codeclimate.gpa">
     <h2>
-      <a ng-href="{{data.codeclimate.url}}">code climate: ruby</a>
+      <a ng-href="{{data.codeclimate.url}}">code climate</a>
     </h2>
-    <div class="ccdash-block-content ccdash-codeclimate-donut-container">
-      <div id="ccdash-codeclimate-donut" class="ccdash-codeclimate-donut"></div>
+    <div class="ccdash-block-content ccdash-state-item-content">
+      <div class="ccdash-codeclimate-gpa" ng-bind="data.codeclimate.gpa"></div>
+      <div>GPA</div>
     </div>
   </div>
 
