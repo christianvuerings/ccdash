@@ -66,6 +66,19 @@ body {
   padding: 10px 20px;
 }
 
+.ccdash-gemnasium-numbers {
+  margin-top: 10px;
+}
+.ccdash-gemnasium-numbers > div {
+  border-radius: 50%;
+  display: inline-block;
+  font-size: 20px;
+  height: 60px;
+  padding-top: 15px;
+  text-align: center;
+  width: 60px;
+}
+
 .ccdash-state-item {
   height: 180px;
   width: 250px;
@@ -77,13 +90,13 @@ body {
   text-align: center;
 }
 .ccdash-state-warning {
-  background: #ff7e00
+  background-color: #daae25;
 }
 .ccdash-state-failed {
-  background: #f75b49;
+  background-color: #f75b49;
 }
 .ccdash-state-successful {
-  background: #689b3a;
+  background-color: #689b3a;
 }
 
 .ccdash-pulls {

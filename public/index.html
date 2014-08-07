@@ -47,12 +47,11 @@
     </div>
   </div>
 
-  <div class="ccdash-block ccdash-state-item {{data.stats.live_updates_warmer.state}}">
+  <div data-ng-if="data.stats.live_updates_warmer.average_time" class="ccdash-block ccdash-state-item {{data.stats.live_updates_warmer.state}}">
     <h2>
       live updates
     </h2>
     <div class="ccdash-block-content ccdash-state-item-content">
-      <span ng-hide="data.stats.live_updates_warmer.average_time">--</span>
       <span ng-bind="data.stats.live_updates_warmer.average_time"></span> sec/user
     </div>
   </div>
@@ -71,7 +70,18 @@
     </ul>
   </div>
 
-  <div class="ccdash-block ccdash-state-item ccdash-clear" data-ng-show="data.codeclimate.gpa">
+  <div class="ccdash-block ccdash-clear ccdash-state-item ccdash-state-{{data.gemnasium.state}}" data-ng-show="data.gemnasium.url">
+    <h2>
+      <a ng-href="{{data.gemnasium.url}}">gemnasium</a>
+    </h2>
+    <div class="ccdash-block-content ccdash-clearfix-container ccdash-state-item-content ccdash-gemnasium-numbers">
+      <div ng-bind="data.gemnasium.uptodate" class="ccdash-state-successful" title="Up to date gems"></div>
+      <div ng-bind="data.gemnasium.notlast" class="ccdash-state-warning" title="Not the last version of the gem"></div>
+      <div ng-bind="data.gemnasium.outdated" class="ccdash-state-failed" title="Update these gems now"></div>
+    </div>
+  </div>
+
+  <div class="ccdash-block ccdash-state-item" data-ng-show="data.codeclimate.gpa">
     <h2>
       <a ng-href="{{data.codeclimate.url}}">code climate</a>
     </h2>
