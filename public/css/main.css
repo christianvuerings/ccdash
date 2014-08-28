@@ -99,6 +99,11 @@ body {
   background-color: #689b3a;
 }
 
+.ccdash-text-big {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .ccdash-pulls {
   max-width: 830px;
 }
@@ -110,11 +115,6 @@ body {
 .ccdash-pulls-user {
   float: right;
   opacity: 0.4;
-}
-
-.ccdash-codeclimate-gpa {
-  font-size: 24px;
-  font-weight: bold;
 }
 
 /* Spinner */

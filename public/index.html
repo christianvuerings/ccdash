@@ -86,8 +86,17 @@
       <a ng-href="{{data.codeclimate.url}}">code climate</a>
     </h2>
     <div class="ccdash-block-content ccdash-state-item-content">
-      <div class="ccdash-codeclimate-gpa" ng-bind="data.codeclimate.gpa"></div>
+      <div class="ccdash-text-big" ng-bind="data.codeclimate.gpa"></div>
       <div>GPA</div>
+    </div>
+  </div>
+
+  <div class="ccdash-block ccdash-state-item" data-ng-show="data.analytics.activeUsers">
+    <h2>
+      <a ng-href="{{data.analytics.url}}">active users</a>
+    </h2>
+    <div class="ccdash-block-content ccdash-state-item-content">
+      <div class="ccdash-text-big" ng-bind="data.analytics.activeUsers"></div>
     </div>
   </div>
 
