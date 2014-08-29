@@ -18,7 +18,7 @@ var parseAnalytics = function(body) {
 
 var scrapeAnalytics = function() {
   request({
-    url: 'https://ccdashanalytics.appspot.com/query?id=ahFzfmNjZGFzaGFuYWx5dGljc3IVCxIIQXBpUXVlcnkYgICAgICAgAoM&format=json',
+    url: 'https://ccdashanalytics2.appspot.com/query?id=ahJzfmNjZGFzaGFuYWx5dGljczJyFQsSCEFwaVF1ZXJ5GICAgICAgIAKDA&format=json',
     rejectUnauthorized: false
   }, function (error, response, body) {
     if (!error && response.statusCode === 200) {
@@ -30,7 +30,7 @@ var scrapeAnalytics = function() {
 };
 
 var init = function() {
-  setInterval(scrapeAnalytics, 5000);
+  setInterval(scrapeAnalytics, 30000);
 };
 
 module.exports = {
