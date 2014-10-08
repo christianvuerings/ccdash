@@ -8,6 +8,7 @@
   "indent": 2,
   "latedef": true,
   "noempty": true,
+  "node": true,
   "nonew": true,
   "quotmark": "single",
   "undef": true,
