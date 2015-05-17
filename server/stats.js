@@ -6,7 +6,13 @@ var sendEvent = function(scrapeResponse) {
 };
 
 var parseStats = function(stats) {
-  stats = JSON.parse(stats);
+
+  // Make sure that the server doesn't crash when we receive non JSON data.
+  try {
+    stats = JSON.parse(stats);
+  } catch (e) {
+    return;
+  }
 
   // hot plate
   stats.hot_plate.average_time = (stats.hot_plate.total_warmup_time / stats.hot_plate.total_warmups_processed).toFixed(1);
