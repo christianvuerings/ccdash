@@ -10,7 +10,7 @@ var parseAnalytics = function(body) {
 
   var response = {
     activeUsers: parseInt(body.totalsForAllResults['rt:activeUsers'], 10),
-    url: 'https://calcentral.berkeley.edu/'
+    url: 'https://www.google.com/analytics/web/?hl=en'
   };
 
   sendEvent(response);
