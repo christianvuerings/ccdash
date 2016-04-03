@@ -26,7 +26,7 @@ var scrapeGpa = function() {
       });
     }
   });
-  timeout = setTimeout(scrapeGpa, 4000);
+  timeout = setTimeout(scrapeGpa, 21600000);
 };
 
 var init = function() {
